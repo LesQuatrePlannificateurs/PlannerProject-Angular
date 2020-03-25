@@ -55,4 +55,26 @@
       </div>
     </div>
   </div>
+
+  <div class="row mt-4 text-center ">
+    <div class="col-md-4 text-center">
+    </div>
+    <div class="col-md-4 text-center">
+      <form>
+        <label for="inputNameIndispo" class="sr-only">Lesson</label>
+        <input #eventToAddNameIndispo id="inputNameIndispo" class="form-control text-center" placeholder="Lesson" required autofocus>
+        <label for="inputStart" class="sr-only">Start time</label>
+        <input #eventToAddStart type="datetime-local" id="inputStart" class="form-control text-center" required autofocus>
+        <label for="inputEnd" class="sr-only">End time</label>
+        <input #eventToAddEnd type="datetime-local" id="inputEnd" class="form-control text-center" required autofocus>
+        <!-- (click) passes input value to add() and then clears the input -->
+        <div class="btn btn-primary" (click)="setUp(eventToAddNameIndispo.value, eventToAddStart.value, eventToAddEnd.value); eventToAddNameIndispo.value=''; eventToAddStart.value=''; eventToAddEnd.value=''">
+          Add event
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 text-center">
+    </div>
+  </div>
+
 </div>

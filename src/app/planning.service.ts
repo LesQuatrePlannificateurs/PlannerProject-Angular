@@ -17,7 +17,10 @@ const colors: any = {
 })
 export class PlanningService {
 
-  private planningUrl = 'http://localhost:8080/api/classroomsPlanning/1';
+  private planningUrl = 'http://localhost:8080/apiRoom/classroomsPlanning/1';
+
+  private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
+
 
   constructor(
     private http: HttpClient
@@ -31,7 +34,6 @@ export class PlanningService {
       return this.http.get<Unavailability[]>(this.planningUrl)
       .pipe(map((response:Unavailability[]) => {
         let events: CalendarEvent[] = [];
-        console.log(response);
         response.forEach((unavailability : Unavailability, index) => {
           events = [
             ...events,
@@ -46,4 +48,9 @@ export class PlanningService {
         return events;
       }));
   }
+
+  addEvent(event: Unavailability): Observable<Unavailability>{
+    return this.http.post<Unavailability>(this.addUrl, event, this.httpOptions);
+  }
+
 }
