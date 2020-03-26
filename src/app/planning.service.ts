@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {CalendarEvent,  CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarView} from 'angular-calendar';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Unavailability } from './shared/unavailability.model';
@@ -32,9 +32,9 @@ export class PlanningService {
 
   getEvents(): Observable<CalendarEvent[]> {
       return this.http.get<Unavailability[]>(this.planningUrl)
-      .pipe(map((response:Unavailability[]) => {
+      .pipe(map((response: Unavailability[]) => {
         let events: CalendarEvent[] = [];
-        response.forEach((unavailability : Unavailability, index) => {
+        response.forEach((unavailability: Unavailability, index) => {
           events = [
             ...events,
             {
@@ -57,7 +57,7 @@ export class PlanningService {
   deleteEvent(event: Unavailability): Observable<Unavailability> {
     const id = typeof event === 'number' ? event : event.id;
     const url = `${this.deleteUrl}/${id}`;
-    return this.http.delete<Unavailability>(url, this.httpOptions);
+    return this.http.get<Unavailability>(url, this.httpOptions);
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PlanningService} from '../planning.service';
-import {CalendarEvent,  CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarView} from 'angular-calendar';
 import {startOfDay, endOfDay, startOfHour, endOfHour, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import {Unavailability} from '../shared/unavailability.model';
 
@@ -24,6 +24,22 @@ export class PlanningComponent implements OnInit {
   view: CalendarView = CalendarView.Week;
   events: CalendarEvent[] = [
   ];
+  actions: CalendarEventAction[] = [
+    // {
+    //   label: '<i class="fa fa-fw fa-pencil"></i>',
+    //   a11yLabel: 'Edit',
+    //   onClick: ({ event }: { event: CalendarEvent }): void => {
+    //     this.handleEvent('Edited', event);
+    //   }
+    // },
+    {
+      label: '<i class="fa fa-fw fa-times"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.deleteEvent(event);
+      }
+    }
+  ];
 
   setView(view: CalendarView) {
     this.view = view;
@@ -33,8 +49,11 @@ export class PlanningComponent implements OnInit {
     this.planningService.getEvents()
       .subscribe((data : CalendarEvent[]) => {
         this.events = data;
+        for (let i = 0; i < this.events.length; i++) {
+          this.events[i].actions = this.actions;
+        }
+        console.log(this.events);
       });
-
   }
 
   ngOnInit(): void {
@@ -70,9 +89,5 @@ export class PlanningComponent implements OnInit {
     this.planningService.deleteEvent(eventToDeleteFromDB).subscribe(() => this.getEvents());
   }
 
-  // selectedEvent: any
-  //
-  // delete() {
-  //   this.deleteEvent(this.selectedEvent);
-  // }
+
 }
