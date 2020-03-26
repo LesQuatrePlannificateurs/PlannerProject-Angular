@@ -20,7 +20,7 @@ export class PlanningService {
   private planningUrl = 'http://localhost:8080/apiRoom/classroomsPlanning/1';
 
   private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
-
+  private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
 
   constructor(
     private http: HttpClient
@@ -38,6 +38,7 @@ export class PlanningService {
           events = [
             ...events,
             {
+              id: unavailability.id,
               title: unavailability.nameIndispo,
               start: new Date(unavailability.start),
               end: new Date(unavailability.end),
@@ -49,8 +50,14 @@ export class PlanningService {
       }));
   }
 
-  addEvent(event: Unavailability): Observable<Unavailability>{
+  addEvent(event: Unavailability): Observable<Unavailability> {
     return this.http.post<Unavailability>(this.addUrl, event, this.httpOptions);
+  }
+
+  deleteEvent(event: Unavailability): Observable<Unavailability> {
+    const id = typeof event === 'number' ? event : event.id;
+    const url = `${this.deleteUrl}/${id}`;
+    return this.http.delete<Unavailability>(url, this.httpOptions);
   }
 
 }

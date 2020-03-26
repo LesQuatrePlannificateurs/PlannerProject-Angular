@@ -11,6 +11,7 @@ import { PlanningComponent } from './planning/planning.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { HttpClientModule } from "@angular/common/http";
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     CalendarModule.forRoot(
-      { provide: DateAdapter, useFactory: adapterFactory }),
-    HttpClientModule
+      {provide: DateAdapter, useFactory: adapterFactory}),
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,12 +44,16 @@
           *ngSwitchCase="CalendarView.Week"
           [viewDate]="viewDate"
           [events]="events"
+          [dayStartHour]="8"
+          [dayEndHour]="18"
         >
         </mwl-calendar-week-view>
         <mwl-calendar-day-view
           *ngSwitchCase="CalendarView.Day"
           [viewDate]="viewDate"
           [events]="events"
+          [dayStartHour]="8"
+          [dayEndHour]="18"
         >
         </mwl-calendar-day-view>
       </div>
@@ -61,6 +65,7 @@
     </div>
     <div class="col-md-4 text-center">
       <form>
+        <h1 class="h3 mb-3 font-weight-normal homepageText">Add an event</h1>
         <label for="inputNameIndispo" class="sr-only">Lesson</label>
         <input #eventToAddNameIndispo id="inputNameIndispo" class="form-control text-center" placeholder="Lesson" required autofocus>
         <label for="inputStart" class="sr-only">Start time</label>
@@ -68,9 +73,29 @@
         <label for="inputEnd" class="sr-only">End time</label>
         <input #eventToAddEnd type="datetime-local" id="inputEnd" class="form-control text-center" required autofocus>
         <!-- (click) passes input value to add() and then clears the input -->
-        <div class="btn btn-primary" (click)="setUp(eventToAddNameIndispo.value, eventToAddStart.value, eventToAddEnd.value); eventToAddNameIndispo.value=''; eventToAddStart.value=''; eventToAddEnd.value=''">
+        <div class="btn btn-primary" (click)="addEvent(eventToAddNameIndispo.value, eventToAddStart.value, eventToAddEnd.value); eventToAddNameIndispo.value=''; eventToAddStart.value=''; eventToAddEnd.value=''">
           Add event
         </div>
+      </form>
+    </div>
+    <div class="col-md-4 text-center">
+    </div>
+  </div>
+
+  <div class="row mt-4 text-center ">
+    <div class="col-md-4 text-center">
+    </div>
+    <div class="col-md-4 text-center">
+      <form>
+        <h1 class="h3 mb-3 font-weight-normal homepageText">Delete an event</h1>
+<!--        <select class="form-control text-center" [(ngModel)]="selectedEvent">-->
+<!--          <option *ngFor="let event of events" [value]="event.title">-->
+<!--            {{event.title}}-->
+<!--          </option>-->
+<!--        </select>-->
+<!--        <button class="btn btn-primary" (click)="delete()" value="submit">-->
+<!--          Delete event-->
+<!--        </button>-->
       </form>
     </div>
     <div class="col-md-4 text-center">

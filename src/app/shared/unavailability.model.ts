@@ -1,5 +1,6 @@
 export class Unavailability {
 
+  id: number;
   nameIndispo : string;
   start : string;
   end : string;

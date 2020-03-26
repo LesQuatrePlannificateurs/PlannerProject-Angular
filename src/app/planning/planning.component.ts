@@ -37,17 +37,13 @@ export class PlanningComponent implements OnInit {
 
   }
 
-  setUp(name : string, start : string, end : string): void {
-    this.events = [
-      ...this.events,
-      {
-        title: name,
-        start: new Date(start),
-        end: new Date(end),
-        color: colors.red
-      }
-    ]
+  ngOnInit(): void {
+    this.getEvents();
+  }
+
+  addEvent(name : string, start : string, end : string): void {
     var eventToAdd : Unavailability = {
+      id:null,
       nameIndispo: name,
       start: start,
       end: end,
@@ -56,21 +52,27 @@ export class PlanningComponent implements OnInit {
       equipment : { equipmentId : 1 },
       studentClass : { studentClassId : 1 }
     }
-    this.planningService.addEvent(eventToAdd).subscribe();
+    this.planningService.addEvent(eventToAdd).subscribe(() => this.getEvents());
   }
 
-  ngOnInit(): void {
-    this.getEvents();
+  deleteEvent(eventToDelete: CalendarEvent): void {
+    this.events = this.events.filter(event => event !== eventToDelete);
+    var eventToDeleteFromDB : Unavailability = {
+      id: Number(eventToDelete.id),
+      nameIndispo: eventToDelete.title,
+      start: eventToDelete.start.toDateString(),
+      end: eventToDelete.end.toDateString(),
+      professor : { professorId : 1},
+      classroom : { classroomId : 1 },
+      equipment : { equipmentId : 1 },
+      studentClass : { studentClassId : 1 }
+    }
+    this.planningService.deleteEvent(eventToDeleteFromDB).subscribe(() => this.getEvents());
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfHour(new Date()),
-        end: endOfHour(new Date())
-      }
-    ];
-  }
+  // selectedEvent: any
+  //
+  // delete() {
+  //   this.deleteEvent(this.selectedEvent);
+  // }
 }
