@@ -41,12 +41,12 @@ export class PlanningComponent implements OnInit {
     this.getEvents();
   }
 
-  addEvent(name : string, start : string, end : string): void {
+  addEvent(name: string, start: string, end: string): void {
     var eventToAdd : Unavailability = {
-      id:null,
+      id: null,
       nameIndispo: name,
-      start: start,
-      end: end,
+      start : start,
+      end : end,
       professor : { professorId : 1},
       classroom : { classroomId : 1 },
       equipment : { equipmentId : 1 },

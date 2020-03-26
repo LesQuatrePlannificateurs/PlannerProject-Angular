@@ -32,9 +32,9 @@ export class PlanningService {
 
   getEvents(): Observable<CalendarEvent[]> {
       return this.http.get<Unavailability[]>(this.planningUrl)
-      .pipe(map((response:Unavailability[]) => {
+      .pipe(map((response: Unavailability[]) => {
         let events: CalendarEvent[] = [];
-        response.forEach((unavailability : Unavailability, index) => {
+        response.forEach((unavailability: Unavailability, index) => {
           events = [
             ...events,
             {
