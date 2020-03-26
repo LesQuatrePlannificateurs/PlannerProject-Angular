@@ -29,6 +29,9 @@ export class PlanningComponent implements OnInit {
   ngOnInit(): void {
     // this.getEvents();
     this.getClassroomEventsById();
+    this.getProfessorEventsById();
+    this.getStudentClassEventsById();
+    this.getEquipmentClassEventsById();
   }
   setView(view: CalendarView) {
     this.view = view;
@@ -44,8 +47,29 @@ export class PlanningComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.planningService.getClassroomPlanning(id)
         .subscribe((data: CalendarEvent[]) => {
-      this.events = data;
-    });
+          this.events = data;
+        });
+  }
+  getProfessorEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getProfessorPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+  getStudentClassEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getStudentClassPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+  getEquipmentClassEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getEquipmentPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
   }
   addEvent(name: string, start: string, end: string): void {
     var eventToAdd : Unavailability = {
