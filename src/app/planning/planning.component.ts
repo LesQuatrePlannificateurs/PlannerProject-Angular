@@ -52,7 +52,6 @@ export class PlanningComponent implements OnInit {
         for (let i = 0; i < this.events.length; i++) {
           this.events[i].actions = this.actions;
         }
-        console.log(this.events);
       });
   }
 
@@ -89,5 +88,17 @@ export class PlanningComponent implements OnInit {
     this.planningService.deleteEvent(eventToDeleteFromDB).subscribe(() => this.getEvents());
   }
 
-
+  editEvent(id: number, name : string, start : string, end : string): void {
+    var eventToEdit : Unavailability = {
+      id:id,
+      nameIndispo: name,
+      start: start,
+      end: end,
+      professor : { professorId : 1},
+      classroom : { classroomId : 1 },
+      equipment : { equipmentId : 1 },
+      studentClass : { studentClassId : 1 }
+    }
+    this.planningService.editEvent(eventToEdit).subscribe(() => this.getEvents());
+  }
 }

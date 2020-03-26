@@ -21,6 +21,7 @@ export class PlanningService {
 
   private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
   private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
+  private editUrl = 'http://localhost:8080/apiUnavailability/udpateunavailability';
 
   constructor(
     private http: HttpClient
@@ -60,4 +61,9 @@ export class PlanningService {
     return this.http.get<Unavailability>(url, this.httpOptions);
   }
 
+  editEvent(event: Unavailability): Observable<Unavailability> {
+    const id = typeof event === 'number' ? event : event.id;
+    const url = `${this.editUrl}/${id}`;
+    return this.http.post<Unavailability>(url, event, this.httpOptions);
+  }
 }
