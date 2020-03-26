@@ -4,7 +4,7 @@ import {CalendarEvent,  CalendarView} from 'angular-calendar';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Unavailability } from './shared/unavailability.model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 const colors: any = {
   red: {
@@ -18,6 +18,7 @@ const colors: any = {
 export class PlanningService {
 
   private planningUrl = 'http://localhost:8080/apiRoom/classroomsPlanning/1';
+  private classroomPlanningUrl = 'http://localhost:8080/apiRoom/classroomsPlanning';
 
   private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
   private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
@@ -48,6 +49,26 @@ export class PlanningService {
         });
         return events;
       }));
+  }
+  getClassroomPlanning(id: number): Observable<CalendarEvent[]> {
+    const url = `${this.classroomPlanningUrl}/${id}`;
+    return this.http.get<Unavailability[]>(url)
+        .pipe(map((response: Unavailability[]) => {
+          let events: CalendarEvent[] = [];
+          response.forEach((unavailability: Unavailability, index) => {
+            events = [
+              ...events,
+              {
+                id: unavailability.id,
+                title: unavailability.nameIndispo,
+                start: new Date(unavailability.start),
+                end: new Date(unavailability.end),
+                color: colors.red
+              }
+            ];
+          });
+          return events;
+        }));
   }
 
   addEvent(event: Unavailability): Observable<Unavailability> {

@@ -3,6 +3,7 @@ import {PlanningService} from '../planning.service';
 import {CalendarEvent,  CalendarView} from 'angular-calendar';
 import {startOfDay, endOfDay, startOfHour, endOfHour, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import {Unavailability} from '../shared/unavailability.model';
+import { ActivatedRoute } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -17,7 +18,7 @@ const colors: any = {
 })
 export class PlanningComponent implements OnInit {
 
-  constructor(private planningService: PlanningService) { }
+  constructor(private planningService: PlanningService,  private route: ActivatedRoute) { }
 
   viewDate: Date = new Date();
   CalendarView = CalendarView;
@@ -25,22 +26,27 @@ export class PlanningComponent implements OnInit {
   events: CalendarEvent[] = [
   ];
 
+  ngOnInit(): void {
+    // this.getEvents();
+    this.getClassroomEventsById();
+  }
   setView(view: CalendarView) {
     this.view = view;
   }
 
   getEvents(): void {
     this.planningService.getEvents()
-      .subscribe((data : CalendarEvent[]) => {
+      .subscribe((data: CalendarEvent[]) => {
         this.events = data;
       });
-
   }
-
-  ngOnInit(): void {
-    this.getEvents();
+  getClassroomEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getClassroomPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+      this.events = data;
+    });
   }
-
   addEvent(name: string, start: string, end: string): void {
     var eventToAdd : Unavailability = {
       id: null,
