@@ -3,6 +3,7 @@ import {PlanningService} from '../planning.service';
 import {CalendarEvent, CalendarEventAction, CalendarView} from 'angular-calendar';
 import {startOfDay, endOfDay, startOfHour, endOfHour, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import {Unavailability} from '../shared/unavailability.model';
+import { ActivatedRoute } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -17,7 +18,7 @@ const colors: any = {
 })
 export class PlanningComponent implements OnInit {
 
-  constructor(private planningService: PlanningService) { }
+  constructor(private planningService: PlanningService,  private route: ActivatedRoute) { }
 
   viewDate: Date = new Date();
   CalendarView = CalendarView;
@@ -41,30 +42,60 @@ export class PlanningComponent implements OnInit {
     }
   ];
 
+  ngOnInit(): void {
+    // this.getEvents();
+    this.getClassroomEventsById();
+    this.getProfessorEventsById();
+    this.getStudentClassEventsById();
+    this.getEquipmentClassEventsById();
+  }
   setView(view: CalendarView) {
     this.view = view;
   }
 
   getEvents(): void {
     this.planningService.getEvents()
-      .subscribe((data : CalendarEvent[]) => {
+      .subscribe((data: CalendarEvent[]) => {
         this.events = data;
         for (let i = 0; i < this.events.length; i++) {
           this.events[i].actions = this.actions;
         }
       });
   }
-
-  ngOnInit(): void {
-    this.getEvents();
+  getClassroomEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getClassroomPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
   }
-
-  addEvent(name : string, start : string, end : string): void {
+  getProfessorEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getProfessorPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+  getStudentClassEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getStudentClassPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+  getEquipmentClassEventsById(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getEquipmentPlanning(id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+  addEvent(name: string, start: string, end: string): void {
     var eventToAdd : Unavailability = {
-      id:null,
+      id: null,
       nameIndispo: name,
-      start: start,
-      end: end,
+      start : start,
+      end : end,
       professor : { professorId : 1},
       classroom : { classroomId : 1 },
       equipment : { equipmentId : 1 },
