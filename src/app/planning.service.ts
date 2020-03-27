@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {CalendarEvent,  CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarView} from 'angular-calendar';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Unavailability } from './shared/unavailability.model';
@@ -25,6 +25,7 @@ export class PlanningService {
 
   private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
   private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
+  private editUrl = 'http://localhost:8080/apiUnavailability/udpateunavailability';
 
 
   constructor(
@@ -143,7 +144,12 @@ export class PlanningService {
   deleteEvent(event: Unavailability): Observable<Unavailability> {
     const id = typeof event === 'number' ? event : event.id;
     const url = `${this.deleteUrl}/${id}`;
-    return this.http.delete<Unavailability>(url, this.httpOptions);
+    return this.http.get<Unavailability>(url, this.httpOptions);
   }
 
+  editEvent(event: Unavailability): Observable<Unavailability> {
+    const id = typeof event === 'number' ? event : event.id;
+    const url = `${this.editUrl}/${id}`;
+    return this.http.post<Unavailability>(url, event, this.httpOptions);
+  }
 }

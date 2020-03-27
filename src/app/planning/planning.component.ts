@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PlanningService} from '../planning.service';
-import {CalendarEvent,  CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarView} from 'angular-calendar';
 import {startOfDay, endOfDay, startOfHour, endOfHour, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import {Unavailability} from '../shared/unavailability.model';
 import { ActivatedRoute } from '@angular/router';
@@ -28,21 +28,12 @@ export class PlanningComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEvents();
-    // this.getClassroomEventsById();
-    // this.getProfessorEventsById();
-    // this.getStudentClassEventsById();
-    // this.getEquipmentClassEventsById();
   }
+  
   setView(view: CalendarView) {
     this.view = view;
   }
 
-  // getEvents(): void {
-  //   this.planningService.getEvents(this.route)
-  //     .subscribe((data: CalendarEvent[]) => {
-  //       this.events = data;
-  //     });
-  // }
   getEvents(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.planningService.getEvents(this.route.snapshot, id)
@@ -107,9 +98,17 @@ export class PlanningComponent implements OnInit {
     this.planningService.deleteEvent(eventToDeleteFromDB).subscribe(() => this.getEvents());
   }
 
-  // selectedEvent: any
-  //
-  // delete() {
-  //   this.deleteEvent(this.selectedEvent);
-  // }
+  editEvent(id: number, name : string, start : string, end : string): void {
+    var eventToEdit : Unavailability = {
+      id:id,
+      nameIndispo: name,
+      start: start,
+      end: end,
+      professor : { professorId : 1},
+      classroom : { classroomId : 1 },
+      equipment : { equipmentId : 1 },
+      studentClass : { studentClassId : 1 }
+    }
+    this.planningService.editEvent(eventToEdit).subscribe(() => this.getEvents());
+  }
 }
