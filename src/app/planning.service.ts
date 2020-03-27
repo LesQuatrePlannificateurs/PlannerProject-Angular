@@ -36,25 +36,6 @@ export class PlanningService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getEvents(): Observable<CalendarEvent[]> {
-      return this.http.get<Unavailability[]>(this.planningUrl)
-      .pipe(map((response: Unavailability[]) => {
-        let events: CalendarEvent[] = [];
-        response.forEach((unavailability: Unavailability, index) => {
-          events = [
-            ...events,
-            {
-              id: unavailability.id,
-              title: unavailability.nameIndispo,
-              start: new Date(unavailability.start),
-              end: new Date(unavailability.end),
-              color: colors.red
-            }
-          ];
-        });
-        return events;
-      }));
-  }
   getClassroomPlanning(id: number): Observable<CalendarEvent[]> {
     const url = `${this.classroomPlanningUrl}/${id}`;
     return this.http.get<Unavailability[]>(url)
@@ -136,7 +117,6 @@ export class PlanningService {
           return events;
         }));
   }
-
 
   addEvent(event: Unavailability): Observable<Unavailability> {
     return this.http.post<Unavailability>(this.addUrl, event, this.httpOptions);
