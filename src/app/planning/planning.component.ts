@@ -27,20 +27,19 @@ export class PlanningComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.getClassroomEventsById();
-    this.getProfessorEventsById();
-    this.getStudentClassEventsById();
-    this.getEquipmentClassEventsById();
+    this.getEvents();
   }
+  
   setView(view: CalendarView) {
     this.view = view;
   }
 
   getEvents(): void {
-    this.planningService.getEvents()
-      .subscribe((data: CalendarEvent[]) => {
-        this.events = data;
-      });
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.planningService.getEvents(this.route.snapshot, id)
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
   }
   getClassroomEventsById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
