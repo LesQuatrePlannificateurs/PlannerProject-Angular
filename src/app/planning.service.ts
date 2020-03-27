@@ -18,6 +18,7 @@ const colors: any = {
 })
 export class PlanningService {
 
+  private planningsUrl = 'http://localhost:8080//apiunavailability/allplannings';
   private classroomPlanningUrl = 'http://localhost:8080/apiRoom/classroomsplanning';
   private professorPlanningUrl = 'http://localhost:8080/apiProf/professorsplanning';
   private studentClassPlanningUrl = 'http://localhost:8080/apiStudentclass/studentclassplanning';
@@ -51,6 +52,8 @@ export class PlanningService {
       return this.getStudentClassPlanning(id);
     } else if (equipmentUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getEquipmentPlanning(id);
+    } else if (this.planningsUrl.includes(route.url[0].toString())){
+      return this.getAllPlannings();
     }
   }
 
@@ -117,6 +120,27 @@ export class PlanningService {
   }
   getEquipmentPlanning(id: number): Observable<CalendarEvent[]> {
     const url = `${this.equipmentPlanningUrl}/${id}`;
+    return this.http.get<Unavailability[]>(url)
+        .pipe(map((response: Unavailability[]) => {
+          let events: CalendarEvent[] = [];
+          response.forEach((unavailability: Unavailability, index) => {
+            events = [
+              ...events,
+              {
+                id: unavailability.id,
+                title: unavailability.nameIndispo,
+                start: new Date(unavailability.start),
+                end: new Date(unavailability.end),
+                color: colors.red
+              }
+            ];
+          });
+          return events;
+        }));
+  }
+
+  getAllPlannings(): Observable<CalendarEvent[]> {
+    const url = this.planningsUrl;
     return this.http.get<Unavailability[]>(url)
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
