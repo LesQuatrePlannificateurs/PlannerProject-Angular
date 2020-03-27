@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'classroomsplanning/:id', component: PlanningComponent },
   { path: 'professorsplanning/:id', component: PlanningComponent },
   { path: 'studentclassplanning/:id', component: PlanningComponent },
-  { path: 'equipmentplanning/:id', component: PlanningComponent }
+  { path: 'equipmentsplanning/:id', component: PlanningComponent }
 ];
 
 @NgModule({

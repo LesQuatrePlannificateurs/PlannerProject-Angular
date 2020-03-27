@@ -17,7 +17,7 @@ import {FormsModule} from '@angular/forms';
   declarations: [
     AppComponent,
     HomepageComponent,
-    PlanningComponent,
+    PlanningComponent
   ],
   imports: [
     NgbModule,
