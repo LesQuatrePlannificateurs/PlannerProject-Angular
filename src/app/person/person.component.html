@@ -1,0 +1,77 @@
+
+
+
+<table class="table table-bordered">
+
+    <div>
+        Professors List
+    </div>
+
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Login</th>
+        <th>Password</th>
+    </tr>
+
+    <tr *ngFor="let professor of professors">
+
+        <td>
+            {{professor.firstname}}
+        </td>
+        <td>
+            {{professor.lastname}}
+        </td>
+        <td>
+            {{professor.login}}
+        </td>
+        <td>
+            {{professor.password}}
+        </td>
+        <td>
+           <a class="btn btn-primary" routerLink="/professorsplanning/{{professor.professorId}}">
+               Professor Planning
+           </a>
+        </td>
+        <!--        <button class="delete" title="delete hero"-->
+        <!--                (click)="delete(hero)">x</button>-->
+    </tr>
+
+</table>
+
+
+
+<table class="table table-bordered">
+    <div>
+        Students List
+    </div>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>StudentClass</th>
+    </tr>
+
+    <tr *ngFor="let student of students">
+
+        <td>
+            {{student.firstname}}
+        </td>
+        <td>
+            {{student.lastname}}
+        </td>
+        <td>
+            {{student.login}}
+        </td>
+        <td>
+            {{student.password}}
+        </td>
+        <td>
+            {{student.studentClass.name}}
+        </td>
+        <!--        <button class="delete" title="delete hero"-->
+        <!--                (click)="delete(hero)">x</button>-->
+    </tr>
+
+</table>
