@@ -42,6 +42,13 @@ export class PlanningComponent implements OnInit {
         });
   }
 
+  getAllPlannings(): void {
+    this.planningService.getAllPlannings()
+        .subscribe((data: CalendarEvent[]) => {
+          this.events = data;
+        });
+  }
+
   addEvent(name: string, start: string, end: string): void {
     var eventToAdd : Unavailability = {
       id: null,

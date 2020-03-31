@@ -10,14 +10,18 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PlanningComponent } from './planning/planning.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { PersonComponent } from './person/person.component';
+import { GlobalnavComponent } from './globalnav/globalnav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    PlanningComponent
+    PlanningComponent,
+    PersonComponent,
+    GlobalnavComponent
   ],
   imports: [
     NgbModule,
