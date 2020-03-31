@@ -1,29 +1,70 @@
-<div class="title">Welcome Monsieur M</div>
+<!--<div class="title">Welcome Monsieur M</div>-->
 
-<tbody>
-<td>
-    <div class="btn btn-primary" (click)="goBack()">
-        Go back
-    </div>
-</td>
-<td>
-    <a  routerLink="/allplannings">
-        <div class="btn btn-primary">
-            Manage all plannings
-        </div>
-    </a>
-</td>
-<td>
-    <a routerLink="/allpersons">
-        <div class="btn btn-primary">
-            Manage persons
-        </div>
-    </a>
-</td>
-<td>
-    <div class="btn btn-primary">
-        Manage student classes
-    </div>
-</td>
-</tbody>
+<!--<tbody>-->
+<!--<td>-->
+<!--    <div class="btn btn-primary" (click)="goBack()">-->
+<!--        Go back-->
+<!--    </div>-->
+<!--</td>-->
+<!--<td>-->
+<!--    <a  routerLink="/allplannings">-->
+<!--        <div class="btn btn-primary">-->
+<!--            Manage all plannings-->
+<!--        </div>-->
+<!--    </a>-->
+<!--</td>-->
+<!--<td>-->
+<!--    <a routerLink="/allpersons">-->
+<!--        <div class="btn btn-primary">-->
+<!--            Manage persons-->
+<!--        </div>-->
+<!--    </a>-->
+<!--</td>-->
+<!--<td>-->
+<!--    <div class="btn btn-primary">-->
+<!--        Manage student classes-->
+<!--    </div>-->
+<!--</td>-->
+<!--</tbody>-->
 
+<!--Navbar-->
+<!--<ul ngbNav #nav="ngbNav" class="nav-tabs">-->
+<!--  <li ngbNavItem>-->
+<!--    <a ngbNavLink (click)="goBack()">Go Back</a>-->
+<!--  </li>-->
+<!--  <li ngbNavItem>-->
+<!--    <a ngbNavLink routerLink="allplannings">Manage all plannings</a>-->
+<!--  </li>-->
+<!--  <li ngbNavItem>-->
+<!--    <a ngbNavLink routerLink="allpersons">Manage all persons</a>-->
+<!--  </li>-->
+<!--</ul>-->
+<!--<div [ngbNavOutlet]="nav"></div>-->
+
+
+<!--<app-globalnav></app-globalnav>-->
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Carousel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>

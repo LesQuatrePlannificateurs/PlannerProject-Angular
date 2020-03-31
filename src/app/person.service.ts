@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Person} from './shared/person.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CalendarEvent} from 'angular-calendar';
-import {Unavailability} from './shared/unavailability.model';
+
 
 @Injectable({
   providedIn: 'root'
