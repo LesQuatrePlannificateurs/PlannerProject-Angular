@@ -29,7 +29,7 @@ export class PlanningComponent implements OnInit {
   ngOnInit(): void {
     this.getEvents();
   }
-  
+
   setView(view: CalendarView) {
     this.view = view;
   }
@@ -41,6 +41,7 @@ export class PlanningComponent implements OnInit {
           this.events = data;
         });
   }
+
   getAllPlannings(): void {
     this.planningService.getAllPlannings()
         .subscribe((data: CalendarEvent[]) => {

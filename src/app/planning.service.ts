@@ -42,8 +42,6 @@ export class PlanningService {
     const professorsUrlPlanning = `${this.professorPlanningUrl}/${id}`;
     const studentClassUrlPlanning = `${this.studentClassPlanningUrl}/${id}`;
     const equipmentUrlPlanning = `${this.equipmentPlanningUrl}/${id}`;
-    console.log(`${route.url[0].toString()}/${id}`);
-    console.log(equipmentUrlPlanning);
     if (classroomUrlplanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getClassroomPlanning(id);
     } else if (professorsUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
