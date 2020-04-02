@@ -18,11 +18,11 @@ const colors: any = {
 })
 export class PlanningService {
 
-  private planningsUrl = 'http://localhost:8080//apiunavailability/allplannings';
-  private classroomPlanningUrl = 'http://localhost:8080/apiRoom/classroomsplanning';
-  private professorPlanningUrl = 'http://localhost:8080/apiProf/professorsplanning';
-  private studentClassPlanningUrl = 'http://localhost:8080/apiStudentclass/studentclassplanning';
-  private equipmentPlanningUrl = 'http://localhost:8080/apiEquipment/equipmentsplanning';
+  private planningsUrl = 'http://localhost:8080/apiunavailability/allplannings';
+  private classroomPlanningUrl = 'http://localhost:8080/apiroom/classroomsplanning';
+  private professorPlanningUrl = 'http://localhost:8080/apiprof/professorsplanning';
+  private studentClassPlanningUrl = 'http://localhost:8080/apistudentclass/studentclassplanning';
+  private equipmentPlanningUrl = 'http://localhost:8080/apiequipment/equipmentsplanning';
 
   private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
   private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
@@ -45,6 +45,7 @@ export class PlanningService {
     if (classroomUrlplanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getClassroomPlanning(id);
     } else if (professorsUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
+      console.log(`${route.url[0].toString()}/${id}`);
       return this.getProfessorPlanning(id);
     } else if (studentClassUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getStudentClassPlanning(id);
