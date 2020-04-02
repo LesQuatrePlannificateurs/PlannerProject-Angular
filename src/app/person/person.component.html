@@ -1,6 +1,3 @@
-
-
-
 <!--<table class="table table-bordered">-->
 
 <!--    <div>-->
@@ -40,7 +37,6 @@
 <!--</table>-->
 
 
-
 <!--<table class="table table-bordered">-->
 <!--    <div>-->
 <!--        Students List-->
@@ -74,7 +70,51 @@
 <!--        &lt;!&ndash;                (click)="delete(hero)">x</button>&ndash;&gt;-->
 <!--    </tr>-->
 
-<!--</table>-->
+<div class="listTitle">
+  <h1>Professors</h1>
+</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm" *ngFor="let professor of professors">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">{{professor.lastname}} {{professor.firstname}}</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Login : {{professor.login}}</li>
+          <li>Password : {{professor.password}}</li>
+          <a class="btn btn-primary" routerLink="/professorsplanning/{{professor.professorId}}">
+            Planning
+          </a>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="deleteProfessor(professor)">Delete</button>
+      </div>
+    </div>
 
+  </div>
+</div>
 
+<div class="listTitle">
+  <h1>Students</h1>
+</div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm" *ngFor="let student of students">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">{{student.lastname}} {{student.firstname}}</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Login : {{student.login}}</li>
+          <li>Password : {{student.password}}</li>
+          <li>Class : {{student.studentClass.name}}</li>
+          <a class="btn btn-primary" routerLink="/studentclassplanning/{{student.studentClass.studentClassId}}">
+            Class planning
+          </a>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="deleteStudent(student)">Delete</button>
+      </div>
+    </div>
 
+  </div>
+</div>

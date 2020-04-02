@@ -53,8 +53,8 @@ export class PlanningComponent implements OnInit {
     var eventToAdd : Unavailability = {
       id: null,
       nameIndispo: name,
-      start : start,
-      end : end,
+      start: start,
+      end: end,
       professor : { professorId : 1},
       classroom : { classroomId : 1 },
       equipment : { equipmentId : 1 },
@@ -65,7 +65,7 @@ export class PlanningComponent implements OnInit {
 
   deleteEvent(eventToDelete: CalendarEvent): void {
     this.events = this.events.filter(event => event !== eventToDelete);
-    var eventToDeleteFromDB : Unavailability = {
+    const eventToDeleteFromDB: Unavailability = {
       id: Number(eventToDelete.id),
       nameIndispo: eventToDelete.title,
       start: eventToDelete.start.toDateString(),
@@ -78,9 +78,9 @@ export class PlanningComponent implements OnInit {
     this.planningService.deleteEvent(eventToDeleteFromDB).subscribe(() => this.getEvents());
   }
 
-  editEvent(id: number, name : string, start : string, end : string): void {
-    var eventToEdit : Unavailability = {
-      id:id,
+  editEvent(id: number, name: string, start: string, end: string): void {
+    const eventToEdit: Unavailability = {
+      id: id,
       nameIndispo: name,
       start: start,
       end: end,

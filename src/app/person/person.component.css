@@ -1,1 +1,7 @@
-
+.container{
+  margin: 5%;
+}
+.listTitle{
+  text-align: center;
+  margin-top: 5%;
+}
