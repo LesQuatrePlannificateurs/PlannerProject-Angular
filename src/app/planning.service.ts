@@ -24,9 +24,9 @@ export class PlanningService {
   private studentClassPlanningUrl = 'http://localhost:8080/apistudentclass/studentclassplanning';
   private equipmentPlanningUrl = 'http://localhost:8080/apiequipment/equipmentsplanning';
 
-  private addUrl = 'http://localhost:8080/apiUnavailability/addunavailability';
-  private deleteUrl = 'http://localhost:8080/apiUnavailability/deleteunavailability';
-  private editUrl = 'http://localhost:8080/apiUnavailability/udpateunavailability';
+  private addUrl = 'http://localhost:8080/apiunavailability/addunavailability';
+  private deleteUrl = 'http://localhost:8080/apiunavailability/deleteunavailability';
+  private editUrl = 'http://localhost:8080/apiunavailability/udpateunavailability';
 
 
   constructor(
@@ -45,7 +45,6 @@ export class PlanningService {
     if (classroomUrlplanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getClassroomPlanning(id);
     } else if (professorsUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
-      console.log(`${route.url[0].toString()}/${id}`);
       return this.getProfessorPlanning(id);
     } else if (studentClassUrlPlanning.includes(`${route.url[0].toString()}/${id}`)) {
       return this.getStudentClassPlanning(id);
