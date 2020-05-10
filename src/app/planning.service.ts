@@ -56,8 +56,12 @@ export class PlanningService {
   }
 
   getClassroomPlanning(id: number): Observable<CalendarEvent[]> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const url = `${this.classroomPlanningUrl}/${id}`;
-    return this.http.get<Unavailability[]>(url)
+    return this.http.get<Unavailability[]>(url, {headers})
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
           response.forEach((unavailability: Unavailability, index) => {
@@ -76,8 +80,12 @@ export class PlanningService {
         }));
   }
   getProfessorPlanning(id: number): Observable<CalendarEvent[]> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const url = `${this.professorPlanningUrl}/${id}`;
-    return this.http.get<Unavailability[]>(url)
+    return this.http.get<Unavailability[]>(url, {headers})
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
           response.forEach((unavailability: Unavailability, index) => {
@@ -97,8 +105,12 @@ export class PlanningService {
   }
 
   getStudentClassPlanning(id: number): Observable<CalendarEvent[]> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const url = `${this.studentClassPlanningUrl}/${id}`;
-    return this.http.get<Unavailability[]>(url)
+    return this.http.get<Unavailability[]>(url, {headers})
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
           response.forEach((unavailability: Unavailability, index) => {
@@ -117,8 +129,12 @@ export class PlanningService {
         }));
   }
   getEquipmentPlanning(id: number): Observable<CalendarEvent[]> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const url = `${this.equipmentPlanningUrl}/${id}`;
-    return this.http.get<Unavailability[]>(url)
+    return this.http.get<Unavailability[]>(url, {headers})
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
           response.forEach((unavailability: Unavailability, index) => {
@@ -138,8 +154,12 @@ export class PlanningService {
   }
 
   getAllPlannings(): Observable<CalendarEvent[]> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const url = this.planningsUrl;
-    return this.http.get<Unavailability[]>(url)
+    return this.http.get<Unavailability[]>(url, {headers})
         .pipe(map((response: Unavailability[]) => {
           let events: CalendarEvent[] = [];
           response.forEach((unavailability: Unavailability, index) => {

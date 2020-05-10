@@ -26,29 +26,46 @@ export class PersonService {
   };
 
   getAllStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.allstudentsUrl); // impossible d'avoir tout le monde dans la meme requete
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Student[]>(this.allstudentsUrl, {headers}); // impossible d'avoir tout le monde dans la meme requete
   }
 
   getStudentById(id: number): Observable<Student> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     const url = `${this.studentByIdUrl}/${id}`;
-    return this.http.get<Student>(url);
+    return this.http.get<Student>(url, {headers});
   }
 
   getAllProfessors(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(this.allprofessorsUrl);
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<Professor[]>(this.allprofessorsUrl, {headers});
   }
 
 
   deleteProfessor(professor: Professor | number): Observable<Professor> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+
     const id = typeof professor === 'number' ? professor : professor.professorId;
     const url = `${this.deleteProfessorByIdUrl}/${id}`;
-    return this.http.get<Professor>(url, this.httpOptions);
+    return this.http.get<Professor>(url, {headers});
   }
 
   deleteStudent(student: Student | number): Observable<Student> {
+    let username = sessionStorage.getItem('username');
+    let password=sessionStorage.getItem('password');
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    
     const id = typeof student === 'number' ? student : student.studentId;
     const url = `${this.deleteStudentByIdUrl}/${id}`;
-    return this.http.get<Student>(url, this.httpOptions);
+    return this.http.get<Student>(url, {headers});
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import {PersonComponent} from '../person/person.component';
+import { AuthenticationService } from '../service/authentification.service';
 
 
 @Component({
@@ -10,9 +11,7 @@ import {PersonComponent} from '../person/person.component';
 })
 export class GlobalnavComponent implements OnInit {
 
-  constructor(private location: Location) { }
-
-
+  constructor(private location: Location, public loginService: AuthenticationService) { }
 
 
   ngOnInit(): void {

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { PersonComponent } from './person/person.component';
 import { GlobalnavComponent } from './globalnav/globalnav.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GlobalnavComponent } from './globalnav/globalnav.component';
     HomepageComponent,
     PlanningComponent,
     PersonComponent,
-    GlobalnavComponent
+    GlobalnavComponent,
+    LogoutComponent,
   ],
   imports: [
     NgbModule,

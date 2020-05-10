@@ -4,6 +4,7 @@ import { HomepageComponent} from './homepage/homepage.component';
 import {PlanningComponent} from './planning/planning.component';
 import { HttpClientModule } from '@angular/common/http';
 import {PersonComponent} from './person/person.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'studentclassplanning/:id', component: PlanningComponent },
   { path: 'equipmentsplanning/:id', component: PlanningComponent },
   { path: 'allplannings', component: PlanningComponent },
-  { path: 'allpersons', component: PersonComponent }
+  { path: 'allpersons', component: PersonComponent },
+  { path : 'logout', component: LogoutComponent}
 ];
 
 @NgModule({
